@@ -22,6 +22,7 @@ from glob import glob
 from numpy import *
 import h5py
 import shutil
+import builtins
 
 # define colors
 purple = "\033[95m"
@@ -1599,7 +1600,7 @@ for icen in range(len(centralityCutList) - 1):
             int(len(dNdyList)*centralityCutList[icen]/100.)
         ]
         dN_dy_cut_low  = dNdyList[
-            min(len(dNdyList)-1,
+            builtins.min(len(dNdyList)-1,
                 int(len(dNdyList)*centralityCutList[icen+1]/100.))
         ]
         if len(dNcutList) == len(centralityCutList):
