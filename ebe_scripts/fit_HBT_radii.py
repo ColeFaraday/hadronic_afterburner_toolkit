@@ -44,7 +44,7 @@ header = (  "# q_cut[GeV]  lambda  lambda_err  R_out[fm]  R_out_err[fm]  "
           + "R_os[fm]  R_os_err[fm]  R_ol[fm]  R_ol_err[fm]")
 
 # load theory database
-th_database = h5py.File(datafile_name)
+th_database = h5py.File(datafile_name, 'r+')
 event_list = list(th_database.keys())
 for ievent in event_list:
     data_group = th_database[ievent]
@@ -98,6 +98,6 @@ for ievent in event_list:
         h5data = data_group.create_dataset(
                     "{0}".format(HBTradii_filename), data=array(output),
                     compression="gzip", compression_opts=9)
-        h5data.attrs.create("header", string_(header))
+        h5data.attrs.create("header", header.encode('utf-8'))
 th_database.close()
 
