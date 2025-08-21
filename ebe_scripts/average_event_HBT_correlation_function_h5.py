@@ -25,6 +25,8 @@ yellow = "\033[93m"
 red = "\033[91m"
 normal = "\033[0m"
 
+min = __builtins__.min # fix for pollution of global namespace with numpy
+
 KT_values = ['0.15_0.25', '0.25_0.35', '0.35_0.45', '0.45_0.55']
 
 Reg_centrality_cut_list = [0., 5., 10., 20., 30., 40., 50.,
