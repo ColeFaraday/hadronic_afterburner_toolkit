@@ -4,6 +4,7 @@ import json
 import h5py
 import numpy as np
 from scipy.optimize import curve_fit
+import os
 
 hbarc = 0.19733
 KT_values = ['0.15_0.25', '0.25_0.35', '0.35_0.45', '0.45_0.55']
@@ -50,6 +51,16 @@ def main():
     centrality_json = sys.argv[2]
     output_h5 = sys.argv[3]
     mapping_key = sys.argv[4] if len(sys.argv) > 4 else None
+
+    # Check if output file exists
+    if os.path.exists(output_h5):
+        resp = input(f"Output file '{output_h5}' exists. Overwrite? (y/n): ").strip().lower()
+        if resp == 'y':
+            os.remove(output_h5)
+            print(f"Deleted '{output_h5}'. Proceeding...")
+        else:
+            print("Aborted.")
+            sys.exit(0)
 
     with h5py.File(input_h5, 'r') as hf, h5py.File(output_h5, 'w') as out_h5:
         if mapping_key is not None:
